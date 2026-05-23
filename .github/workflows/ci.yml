@@ -1,0 +1,50 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test and lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+          cache: true
+
+      - name: Run tests
+        run: go test ./... -v
+
+      - name: Run linter
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+
+  validate:
+    name: Self-validate with sample config
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "stable"
+          cache: true
+
+      - name: Build
+        run: go build -o dbvalidator ./cmd/dbvalidator
+
+      - name: Run validator (terminal output)
+        run: ./dbvalidator --config testdata/sample.yaml
+
+      - name: Run validator (JUnit output)
+        run: ./dbvalidator --config testdata/sample.yaml --format junit > results.xml
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: results.xml

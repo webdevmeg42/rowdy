@@ -1,0 +1,60 @@
+database:
+  path: ":memory:"
+
+test_cases:
+  - name: "active users query returns one row"
+    seed:
+      table: users
+      rows:
+        - { id: 1, name: "Alice", age: 30, status: "active",   email: "alice@example.com" }
+        - { id: 2, name: "Bob",   age: 25, status: "inactive", email: "bob@example.com"   }
+    query: "SELECT * FROM users WHERE status = 'active'"
+    assertions:
+      - type: row_count
+        expected: 1
+      - type: column_exists
+        column: email
+      - type: not_null
+        column: name
+      - type: value
+        column: name
+        row: 0
+        equals: "Alice"
+      - type: value
+        column: age
+        row: 0
+        equals: 30
+      - type: format
+        column: email
+        format: email
+
+  - name: "all users have valid emails"
+    seed:
+      table: all_users
+      rows:
+        - { id: 1, name: "Alice", email: "alice@example.com" }
+        - { id: 2, name: "Bob",   email: "bob@example.com"   }
+        - { id: 3, name: "Carol", email: "carol@example.com" }
+    query: "SELECT * FROM all_users"
+    assertions:
+      - type: row_count
+        expected: 3
+      - type: format
+        column: email
+        format: email
+      - type: not_null
+        column: name
+
+  - name: "uuid format validation"
+    seed:
+      table: sessions
+      rows:
+        - { token: "550e8400-e29b-41d4-a716-446655440000", user_id: 1 }
+        - { token: "6ba7b810-9dad-11d1-80b4-00c04fd430c8", user_id: 2 }
+    query: "SELECT * FROM sessions"
+    assertions:
+      - type: row_count
+        expected: 2
+      - type: format
+        column: token
+        format: uuid
