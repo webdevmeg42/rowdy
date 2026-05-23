@@ -117,5 +117,21 @@ The tool validates itself on every push using GitHub Actions. The `validate` job
 ## Running the tests
 
 ```bash
+# Run all tests
 go test ./...
+
+# Force re-run, bypassing cache
+go test ./... -count=1
+
+# Verbose output (shows each test name and pass/fail)
+go test ./... -v
+
+# Run a specific package
+go test ./pkg/validator/assertions/...
+
+# Run a specific test by name
+go test ./... -run TestRowCount_Pass
+
+# Run with race detector
+go test ./... -race
 ```
