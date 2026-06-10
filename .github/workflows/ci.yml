@@ -35,13 +35,13 @@ jobs:
           cache: true
 
       - name: Build
-        run: go build -o dbvalidator ./cmd/dbvalidator
+        run: go build -o rowdy ./cmd/rowdy
 
       - name: Run validator (terminal output)
-        run: ./dbvalidator --config testdata/sample.yaml
+        run: ./rowdy --config testdata/sample.yaml
 
       - name: Run validator (JUnit output)
-        run: ./dbvalidator --config testdata/sample.yaml --format junit > results.xml
+        run: ./rowdy --config testdata/sample.yaml --format junit > results.xml
 
       - name: Upload test results
         uses: actions/upload-artifact@v4

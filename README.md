@@ -1,4 +1,4 @@
-# dbvalidator
+# Rowdy
 
 A Go CLI tool that validates SQL queries against expected results using YAML-defined test cases. Seed fixture data, run queries, assert on row counts, column shapes, null values, specific values, and data formats — all from a single config file.
 
@@ -26,23 +26,23 @@ Define test cases in YAML, point the tool at a SQLite database, get clear pass/f
 # Build from source
 git clone https://github.com/webdevmeg42/rowdy
 cd rowdy
-go build -o dbvalidator ./cmd/dbvalidator
+go build -o rowdy ./cmd/rowdy
 
 # Or install directly
-go install github.com/webdevmeg42/rowdy/cmd/dbvalidator@latest
+go install github.com/webdevmeg42/rowdy/cmd/rowdy@latest
 ```
 
 ## Usage
 
 ```bash
 # Run with default terminal output
-./dbvalidator --config queries.yaml
+./rowdy --config queries.yaml
 
 # Run with JUnit XML output (for CI)
-./dbvalidator --config queries.yaml --format junit > results.xml
+./rowdy --config queries.yaml --format junit > results.xml
 
 # Override database path from config
-./dbvalidator --config queries.yaml --db ./path/to/test.db
+./rowdy --config queries.yaml --db ./path/to/test.db
 ```
 
 Exit codes: `0` = all pass, `1` = assertion failures, `2` = config/DB error.

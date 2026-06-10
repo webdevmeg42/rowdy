@@ -76,7 +76,7 @@ func JUnit(w io.Writer, results []runner.TestResult) error {
 	}
 	suites := junitTestSuites{
 		Suites: []junitSuite{{
-			Name:      "dbvalidator",
+			Name:      "rowdy",
 			Tests:     len(results),
 			Failures:  failures,
 			TestCases: cases,
