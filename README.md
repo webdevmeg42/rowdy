@@ -24,12 +24,12 @@ Define test cases in YAML, point the tool at a SQLite database, get clear pass/f
 
 ```bash
 # Build from source
-git clone https://github.com/webdevmeg42/dbvalidator
-cd dbvalidator
+git clone https://github.com/webdevmeg42/rowdy
+cd rowdy
 go build -o dbvalidator ./cmd/dbvalidator
 
 # Or install directly
-go install github.com/webdevmeg42/dbvalidator/cmd/dbvalidator@latest
+go install github.com/webdevmeg42/rowdy/cmd/dbvalidator@latest
 ```
 
 ## Usage
@@ -112,7 +112,7 @@ Seed column types are inferred from YAML: integers → `INTEGER`, floats → `RE
 
 The tool validates itself on every push using GitHub Actions. The `validate` job builds the binary, runs it against `testdata/sample.yaml`, and uploads the JUnit XML as a test report artifact.
 
-[![CI](https://github.com/webdevmeg42/dbvalidator/actions/workflows/ci.yml/badge.svg)](https://github.com/webdevmeg42/dbvalidator/actions/workflows/ci.yml)
+[![CI](https://github.com/webdevmeg42/rowdy/actions/workflows/ci.yml/badge.svg)](https://github.com/webdevmeg42/rowdy/actions/workflows/ci.yml)
 
 ## Running the tests
 

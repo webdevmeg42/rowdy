@@ -1,4 +1,4 @@
-module github.com/webdevmeg42/dbvalidator
+module github.com/webdevmeg42/rowdy
 
 go 1.25.0
 

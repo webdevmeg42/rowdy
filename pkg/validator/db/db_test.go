@@ -3,7 +3,7 @@ package db_test
 import (
 	"testing"
 
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/db"
+	"github.com/webdevmeg42/rowdy/pkg/validator/db"
 )
 
 func TestOpen_Memory(t *testing.T) {

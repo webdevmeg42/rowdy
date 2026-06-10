@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/config"
+	"github.com/webdevmeg42/rowdy/pkg/validator/config"
 )
 
 func writeTempFile(t *testing.T, content string) string {

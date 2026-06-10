@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/fatih/color"
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/runner"
+	"github.com/webdevmeg42/rowdy/pkg/validator/runner"
 )
 
 func Terminal(w io.Writer, results []runner.TestResult) {

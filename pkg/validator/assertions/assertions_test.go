@@ -3,7 +3,7 @@ package assertions_test
 import (
 	"testing"
 
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/assertions"
+	"github.com/webdevmeg42/rowdy/pkg/validator/assertions"
 )
 
 func makeRS(cols []string, rows []map[string]interface{}) assertions.ResultSet {

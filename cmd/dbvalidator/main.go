@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/config"
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/db"
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/reporter"
-	"github.com/webdevmeg42/dbvalidator/pkg/validator/runner"
+	"github.com/webdevmeg42/rowdy/pkg/validator/config"
+	"github.com/webdevmeg42/rowdy/pkg/validator/db"
+	"github.com/webdevmeg42/rowdy/pkg/validator/reporter"
+	"github.com/webdevmeg42/rowdy/pkg/validator/runner"
 )
 
 func main() {
