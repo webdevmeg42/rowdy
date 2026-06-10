@@ -3,9 +3,9 @@ package runner
 import (
 	"database/sql"
 
-	"github.com/meganwall/dbvalidator/pkg/validator/assertions"
-	"github.com/meganwall/dbvalidator/pkg/validator/config"
-	"github.com/meganwall/dbvalidator/pkg/validator/db"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/assertions"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/config"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/db"
 )
 
 type TestResult struct {

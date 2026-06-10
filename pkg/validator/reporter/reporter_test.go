@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/meganwall/dbvalidator/pkg/validator/reporter"
-	"github.com/meganwall/dbvalidator/pkg/validator/runner"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/reporter"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/runner"
 )
 
 var mixedResults = []runner.TestResult{

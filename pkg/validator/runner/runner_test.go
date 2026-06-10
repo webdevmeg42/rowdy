@@ -3,9 +3,9 @@ package runner_test
 import (
 	"testing"
 
-	"github.com/meganwall/dbvalidator/pkg/validator/config"
-	"github.com/meganwall/dbvalidator/pkg/validator/db"
-	"github.com/meganwall/dbvalidator/pkg/validator/runner"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/config"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/db"
+	"github.com/webdevmeg42/dbvalidator/pkg/validator/runner"
 )
 
 func intPtr(i int) *int { return &i }
