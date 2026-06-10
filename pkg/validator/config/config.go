@@ -37,15 +37,6 @@ type Assertion struct {
 	Format   string      `yaml:"format,omitempty"`
 }
 
-var validTypes = map[string]bool{
-	"row_count": true, "column_exists": true, "not_null": true,
-	"value": true, "format": true,
-}
-
-var validFormats = map[string]bool{
-	"email": true, "uuid": true, "date": true, "url": true,
-}
-
 func Load(path string) (*Config, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -73,23 +64,27 @@ func validate(cfg *Config) error {
 			return fmt.Errorf("test_cases[%d] %q: query is required", i, tc.Name)
 		}
 		for j, a := range tc.Assertions {
-			if !validTypes[a.Type] {
+			switch a.Type {
+			case "row_count":
+				if a.Expected == nil {
+					return fmt.Errorf("test_cases[%d] %q: assertions[%d]: row_count requires expected", i, tc.Name, j)
+				}
+			case "column_exists", "not_null", "value", "format":
+				if a.Column == "" {
+					return fmt.Errorf("test_cases[%d] %q: assertions[%d]: %s requires column", i, tc.Name, j, a.Type)
+				}
+				if a.Type == "value" && a.Equals == nil {
+					return fmt.Errorf("test_cases[%d] %q: assertions[%d]: value requires equals", i, tc.Name, j)
+				}
+				if a.Type == "format" {
+					switch a.Format {
+					case "email", "uuid", "date", "url":
+					default:
+						return fmt.Errorf("test_cases[%d] %q: assertions[%d]: unknown format %q", i, tc.Name, j, a.Format)
+					}
+				}
+			default:
 				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: unknown type %q", i, tc.Name, j, a.Type)
-			}
-			if a.Type == "format" && !validFormats[a.Format] {
-				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: unknown format %q", i, tc.Name, j, a.Format)
-			}
-			if a.Type == "row_count" && a.Expected == nil {
-				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: row_count requires expected", i, tc.Name, j)
-			}
-			if (a.Type == "column_exists" || a.Type == "not_null") && a.Column == "" {
-				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: %s requires column", i, tc.Name, j, a.Type)
-			}
-			if a.Type == "value" && a.Column == "" {
-				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: value requires column", i, tc.Name, j)
-			}
-			if a.Type == "value" && a.Equals == nil {
-				return fmt.Errorf("test_cases[%d] %q: assertions[%d]: value requires equals", i, tc.Name, j)
 			}
 		}
 	}

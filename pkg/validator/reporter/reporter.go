@@ -63,15 +63,14 @@ func JUnit(w io.Writer, results []runner.TestResult) error {
 	failures := 0
 	for _, r := range results {
 		tc := junitCase{Name: r.Name}
-		if !r.Passed && len(r.Failures) > 0 {
+		if !r.Passed {
 			failures++
-			tc.Failure = &junitFailure{
-				Message: r.Failures[0],
-				Body:    strings.Join(r.Failures, "\n"),
+			f := &junitFailure{Message: "test failed"}
+			if len(r.Failures) > 0 {
+				f.Message = r.Failures[0]
+				f.Body = strings.Join(r.Failures, "\n")
 			}
-		} else if !r.Passed {
-			failures++
-			tc.Failure = &junitFailure{Message: "test failed"}
+			tc.Failure = f
 		}
 		cases = append(cases, tc)
 	}
